@@ -2,6 +2,12 @@
  
 Small project in which I was interested in the effect of weather on gas usage for heating. I made two 'interventions', changes in the way I heat my home, and was curious what the effect was on gas usage. I wanted to eliminate the variation of the usage as effect of weather difference.
 
+## Data
+
+I got my gas usage numbers from my energy provider. The data are integers in whole cubic meters. In the summer period gas is only used for hot water, so I'd see a 1m3 spike every few days. To correct for that I applied a simple smoothing algorithm: nullify the usage in any 10 day period with less than 2m3 usage.
+
+Weather data was obtained from the KNMI. I selected the weather station in Voorschoten as the most applicable to my situation. The data contains various measurements on a daily basis.
+
 ## Model
 I trained a couple models using the same principle: given the weather as input, what is the predicted gas usage? The idea is that the model learns how I heat my house under different weather conditions. I suspect this is a quite simple relationship.
 
@@ -27,3 +33,9 @@ For fun I also tried a multilayer perceptron using Pytorch, even though I suspec
 Zooming in on the winter of 2022, where I made an intervention on January 16th, we can now see the intervention had a positive effect, since gas usage dropped compared to the months before.
 
 ![afbeelding](https://user-images.githubusercontent.com/33519926/188611996-7268a0ec-5d70-424a-8a3b-f9df20dfcf7c.png)
+
+## Further
+
+Some remaining questions:
+- Sensitivity analysis: are the used variables all important? Maybe wind or sun doesn't contribute that much? In 'industry' they commonly only use temperature to correct gas usage for.
+- Are the prediction errors acceptable?
